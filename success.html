@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Application Submitted - Islamic Aid Bangladesh</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f5ff',
+              100: '#e0ebff',
+              500: '#0F52BA',
+              600: '#0b3c8a',
+            },
+            accent: {
+              500: '#00A86B',
+              600: '#008554',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'Noto Sans Bengali', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="font-sans bg-slate-50 text-slate-800 antialiased min-h-screen flex items-center justify-center p-4">
+
+  <div class="max-w-md w-full bg-white rounded-2xl border border-slate-200 shadow-xl p-8 text-center">
+    <!-- Success Icon -->
+    <div class="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 mx-auto mb-5 text-3xl font-bold shadow-inner">
+      ✓
+    </div>
+
+    <!-- Main Heading -->
+    <h1 class="text-2xl font-extrabold text-slate-900 mb-2">Application Submitted!</h1>
+    <p class="text-sm font-medium text-slate-600 mb-1">আবেদনটি সফলভাবে জমা নেওয়া হয়েছে।</p>
+    <p class="text-xs text-slate-400 mb-6">Islamic Aid Bangladesh - Orphan Screening System</p>
+
+    <!-- Details Box -->
+    <div class="bg-slate-50 border border-slate-100 rounded-xl p-4 mb-6 text-left">
+      <div class="flex items-start space-x-3">
+        <span class="text-lg">📋</span>
+        <div class="text-xs text-slate-600 space-y-1">
+          <p><strong class="text-slate-800">Status:</strong> Received & Logged</p>
+          <p><strong class="text-slate-800">Next Step:</strong> Data synced to database</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Button -->
+    <a href="/index.html" class="inline-flex items-center justify-center w-full px-6 py-3 bg-brand-500 hover:bg-brand-600 text-white text-sm font-bold rounded-xl shadow-md hover:shadow-lg transition-all space-x-2">
+      <span>← Submit Another Application</span>
+    </a>
+  </div>
+
+</body>
+</html>

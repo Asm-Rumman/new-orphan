@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Orphan Screening Form - Islamic Aid Bangladesh</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f5ff',
+              100: '#e0ebff',
+              500: '#0F52BA',
+              600: '#0b3c8a',
+              700: '#082b64',
+            },
+            accent: {
+              500: '#00A86B',
+              600: '#008554',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'Noto Sans Bengali', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body { background-color: #F8FAFC; }
+  </style>
+</head>
+<body class="font-sans text-slate-800 antialiased min-h-screen flex flex-col justify-between py-6 px-4 sm:px-6">
+
+  <!-- Header Banner -->
+  <div class="max-w-4xl mx-auto w-full mb-6">
+    <div class="bg-gradient-to-r from-brand-500 to-brand-600 rounded-2xl text-white p-6 sm:p-8 shadow-md relative overflow-hidden">
+      <div class="flex items-center space-x-3 mb-3">
+        <div class="w-10 h-10 rounded-lg bg-white/20 backdrop-blur-md flex items-center justify-center text-white font-bold text-lg">
+          IAB
+        </div>
+        <span class="text-xs font-medium tracking-wide uppercase bg-white/10 px-3 py-1 rounded-full">Islamic Aid Bangladesh</span>
+      </div>
+      <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight">New Orphan Screening Form</h1>
+      <p class="text-brand-100 text-xs sm:text-sm mt-1">নতুন এতিম আবেদন ফর্ম</p>
+    </div>
+  </div>
+
+  <!-- Main Container -->
+  <main class="max-w-4xl mx-auto w-full flex-grow">
+
+    <!-- Main HTML Form (Netlify & Google Sheets Ready) -->
+    <form id="orphanForm" name="orphan-application" method="POST" data-netlify="true" enctype="multipart/form-data" data-netlify-honeypot="bot-field" class="space-y-6">
+      
+      <!-- Netlify required inputs -->
+      <input type="hidden" name="form-name" value="orphan-application">
+      <p class="hidden"><label>Do not fill this: <input name="bot-field"></label></p>
+
+      <!-- SECTION 1 -->
+      <div class="bg-white rounded-xl border border-slate-200 p-5 sm:p-6 shadow-sm">
+        <div class="flex items-center space-x-3 pb-4 mb-5 border-b border-slate-100">
+          <span class="w-7 h-7 rounded-full bg-brand-50 text-brand-500 font-bold flex items-center justify-center text-xs border border-brand-100">1</span>
+          <div>
+            <h2 class="text-base font-bold text-slate-900">Applicant Information</h2>
+            <p class="text-xs text-slate-500">আবেদনকারীর তথ্য</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label for="full_name_en" class="block text-xs font-semibold text-slate-700 mb-1">Full Name (English) <span class="text-red-500">*</span></label>
+            <input type="text" id="full_name_en" name="full_name_en" required placeholder="Enter full name in English" class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+          </div>
+
+          <div>
+            <label for="full_name_bn" class="block text-xs font-semibold text-slate-700 mb-1">Full Name (Bengali) | পূর্ণ নাম (বাংলা) <span class="text-red-500">*</span></label>
+            <input type="text" id="full_name_bn" name="full_name_bn" required placeholder="বাংলায় পূর্ণ নাম লিখুন" class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+          </div>
+
+          <div>
+            <label for="gender" class="block text-xs font-semibold text-slate-700 mb-1">Gender | লিঙ্গ <span class="text-red-500">*</span></label>
+            <select id="gender" name="gender" required class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+              <option value="">Select Gender</option>
+              <option value="Male">Male / ছেলে</option>
+              <option value="Female">Female / মেয়ে</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="date_of_birth" class="block text-xs font-semibold text-slate-700 mb-1">Date of Birth | জন্ম তারিখ <span class="text-red-500">*</span></label>
+            <input type="date" id="date_of_birth" name="date_of_birth" required class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+          </div>
+
+          <div>
+            <label for="village" class="block text-xs font-semibold text-slate-700 mb-1">Village | গ্রাম <span class="text-red-500">*</span></label>
+            <input type="text" id="village" name="village" required class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+          </div>
+
+          <div>
+            <label for="union" class="block text-xs font-semibold text-slate-700 mb-1">Union | ইউনিয়ন <span class="text-red-500">*</span></label>
+            <input type="text" id="union" name="union" required class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+          </div>
+
+          <div>
+            <label for="upazila" class="block text-xs font-semibold text-slate-700 mb-1">Upazila | উপজেলা <span class="text-red-500">*</span></label>
+            <input type="text" id="upazila" name="upazila" required class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+          </div>
+
+          <div>
+            <label for="district" class="block text-xs font-semibold text-slate-700 mb-1">District | জেলা <span class="text-red-500">*</span></label>
+            <input type="text" id="district" name="district" required class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 2 -->
+      <div class="bg-white rounded-xl border border-slate-200 p-5 sm:p-6 shadow-sm">
+        <div class="flex items-center space-x-3 pb-4 mb-5 border-b border-slate-100">
+          <span class="w-7 h-7 rounded-full bg-brand-50 text-brand-500 font-bold flex items-center justify-center text-xs border border-brand-100">2</span>
+          <div>
+            <h2 class="text-base font-bold text-slate-900">Academic & Education Information</h2>
+            <p class="text-xs text-slate-500">শিক্ষা সংক্রান্ত তথ্য</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label for="institute_name" class="block text-xs font-semibold text-slate-700 mb-1">Institute Name | শিক্ষা প্রতিষ্ঠানের নাম <span class="text-red-500">*</span></label>
+            <input type="text" id="institute_name" name="institute_name" required class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+          </div>
+
+          <div>
+            <label for="education_type" class="block text-xs font-semibold text-slate-700 mb-1">Education Type | শিক্ষার ধরন <span class="text-red-500">*</span></label>
+            <select id="education_type" name="education_type" required class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+              <option value="">Select Type</option>
+              <option value="Madrasa">Madrasa</option>
+              <option value="Nursery">Nursery</option>
+              <option value="Primary School">Primary School</option>
+              <option value="High School">High School</option>
+              <option value="Hifzul Quran">Hifzul Quran</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="admission_date" class="block text-xs font-semibold text-slate-700 mb-1">Admission Date | ভর্তির তারিখ <span class="text-red-500">*</span></label>
+            <input type="date" id="admission_date" name="admission_date" required class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+          </div>
+
+          <div>
+            <label for="class_grade" class="block text-xs font-semibold text-slate-700 mb-1">Class / Grade | শ্রেণি <span class="text-red-500">*</span></label>
+            <select id="class_grade" name="class_grade" required class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+              <option value="">Select Class</option>
+              <option value="Under school age">Under school age</option>
+              <option value="Class 1">Class 1</option>
+              <option value="Class 2">Class 2</option>
+              <option value="Class 3">Class 3</option>
+              <option value="Class 4">Class 4</option>
+              <option value="Class 5">Class 5</option>
+              <option value="Class 6">Class 6</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="roll" class="block text-xs font-semibold text-slate-700 mb-1">Roll | রোল <span class="text-red-500">*</span></label>
+            <input type="text" id="roll" name="roll" required class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+          </div>
+
+          <div class="sm:col-span-2">
+            <label for="interests_hobbies" class="block text-xs font-semibold text-slate-700 mb-1">Interests & Hobbies | আগ্রহ ও শখ <span class="text-red-500">*</span></label>
+            <textarea id="interests_hobbies" name="interests_hobbies" rows="2" required placeholder="Reading, Sports, Recitation..." class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 3 -->
+      <div class="bg-white rounded-xl border border-slate-200 p-5 sm:p-6 shadow-sm">
+        <div class="flex items-center space-x-3 pb-4 mb-5 border-b border-slate-100">
+          <span class="w-7 h-7 rounded-full bg-brand-50 text-brand-500 font-bold flex items-center justify-center text-xs border border-brand-100">3</span>
+          <div>
+            <h2 class="text-base font-bold text-slate-900">Family & Guardian Information</h2>
+            <p class="text-xs text-slate-500">পারিবারিক ও অভিভাবকের তথ্য</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label for="father_name" class="block text-xs font-semibold text-slate-700 mb-1">Father's Name | পিতার নাম <span class="text-red-500">*</span></label>
+            <input type="text" id="father_name" name="father_name" required class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+          </div>
+
+          <div>
+            <label for="father_cause_of_death" class="block text-xs font-semibold text-slate-700 mb-1">Father's Cause of Death | মৃত্যুর কারণ <span class="text-red-500">*</span></label>
+            <input type="text" id="father_cause_of_death" name="father_cause_of_death" required class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+          </div>
+
+          <div>
+            <label for="father_date_of_death" class="block text-xs font-semibold text-slate-700 mb-1">Father's Date of Death | মৃত্যুর তারিখ <span class="text-red-500">*</span></label>
+            <input type="date" id="father_date_of_death" name="father_date_of_death" required class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+          </div>
+
+          <div>
+            <label for="father_profession" class="block text-xs font-semibold text-slate-700 mb-1">Father's Profession | পিতার পেশা <span class="text-red-500">*</span></label>
+            <input type="text" id="father_profession" name="father_profession" required class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+          </div>
+
+          <div>
+            <label for="mother_name" class="block text-xs font-semibold text-slate-700 mb-1">Mother's Name | মাতার নাম <span class="text-red-500">*</span></label>
+            <input type="text" id="mother_name" name="mother_name" required class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+          </div>
+
+          <div>
+            <label for="mother_status" class="block text-xs font-semibold text-slate-700 mb-1">Mother's Status | মাতার অবস্থা <span class="text-red-500">*</span></label>
+            <select id="mother_status" name="mother_status" required class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+              <option value="">Select Status</option>
+              <option value="Alive">Alive / জীবিত</option>
+              <option value="Deceased">Deceased / মৃত</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="mother_cause_of_death" class="block text-xs font-semibold text-slate-700 mb-1">Mother's Cause of Death | মৃত্যুর কারণ</label>
+            <input type="text" id="mother_cause_of_death" name="mother_cause_of_death" placeholder="N/A if alive" class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+          </div>
+
+          <div>
+            <label for="mother_date_of_death" class="block text-xs font-semibold text-slate-700 mb-1">Mother's Date of Death | মৃত্যুর তারিখ</label>
+            <input type="date" id="mother_date_of_death" name="mother_date_of_death" class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+          </div>
+
+          <div>
+            <label for="mother_profession" class="block text-xs font-semibold text-slate-700 mb-1">Mother's Profession | মাতার পেশা <span class="text-red-500">*</span></label>
+            <input type="text" id="mother_profession" name="mother_profession" required class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+          </div>
+
+          <div>
+            <label for="mother_nid" class="block text-xs font-semibold text-slate-700 mb-1">Mother's NID | মাতার এনআইডি <span class="text-red-500">*</span></label>
+            <input type="text" id="mother_nid" name="mother_nid" required class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+          </div>
+
+          <div>
+            <label for="guardian_name" class="block text-xs font-semibold text-slate-700 mb-1">Guardian's Name | অভিভাবকের নাম <span class="text-red-500">*</span></label>
+            <input type="text" id="guardian_name" name="guardian_name" required class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+          </div>
+
+          <div>
+            <label for="guardian_relation" class="block text-xs font-semibold text-slate-700 mb-1">Relation | সম্পর্ক <span class="text-red-500">*</span></label>
+            <input type="text" id="guardian_relation" name="guardian_relation" required placeholder="e.g. Uncle / Mother" class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+          </div>
+
+          <div>
+            <label for="guardian_profession" class="block text-xs font-semibold text-slate-700 mb-1">Guardian Profession | পেশা <span class="text-red-500">*</span></label>
+            <input type="text" id="guardian_profession" name="guardian_profession" required class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+          </div>
+
+          <div>
+            <label for="guardian_mobile" class="block text-xs font-semibold text-slate-700 mb-1">Guardian Mobile | মোবাইল নম্বর <span class="text-red-500">*</span></label>
+            <input type="tel" id="guardian_mobile" name="guardian_mobile" required placeholder="017XXXXXXXX" class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+          </div>
+
+          <div>
+            <label for="guardian_nid" class="block text-xs font-semibold text-slate-700 mb-1">Guardian NID | অভিভাবকের এনআইডি <span class="text-red-500">*</span></label>
+            <input type="text" id="guardian_nid" name="guardian_nid" required class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+          </div>
+
+          <div>
+            <label for="siblings" class="block text-xs font-semibold text-slate-700 mb-1">Siblings | ভাই-বোন সংখ্যা <span class="text-red-500">*</span></label>
+            <input type="text" id="siblings" name="siblings" required placeholder="e.g. 2 Brothers, 1 Sister" class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+          </div>
+
+          <div class="sm:col-span-2">
+            <label for="residence_status" class="block text-xs font-semibold text-slate-700 mb-1">Residence Status / Present Status | বর্তমান বাসস্থানের অবস্থা <span class="text-red-500">*</span></label>
+            <input type="text" id="residence_status" name="residence_status" required placeholder="Own house, rented, relative's house..." class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 4 -->
+      <div class="bg-white rounded-xl border border-slate-200 p-5 sm:p-6 shadow-sm">
+        <div class="flex items-center space-x-3 pb-4 mb-5 border-b border-slate-100">
+          <span class="w-7 h-7 rounded-full bg-brand-50 text-brand-500 font-bold flex items-center justify-center text-xs border border-brand-100">4</span>
+          <div>
+            <h2 class="text-base font-bold text-slate-900">Health Information</h2>
+            <p class="text-xs text-slate-500">স্বাস্থ্য সংক্রান্ত তথ্য</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div>
+            <label for="health_status" class="block text-xs font-semibold text-slate-700 mb-1">Health Status | স্বাস্থ্যগত অবস্থা <span class="text-red-500">*</span></label>
+            <select id="health_status" name="health_status" required class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+              <option value="">Select Status</option>
+              <option value="Healthy">Healthy / সুস্থ</option>
+              <option value="Needs medical attention">Needs medical attention</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="type_of_sickness" class="block text-xs font-semibold text-slate-700 mb-1">Type of Sickness | অসুস্থতার ধরন <span class="text-red-500">*</span></label>
+            <input type="text" id="type_of_sickness" name="type_of_sickness" required placeholder="None or detail sickness" class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+          </div>
+
+          <div>
+            <label for="treatment_needed" class="block text-xs font-semibold text-slate-700 mb-1">Treatment Needed | চিকিৎসা প্রয়োজন <span class="text-red-500">*</span></label>
+            <select id="treatment_needed" name="treatment_needed" required class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+              <option value="">Select Option</option>
+              <option value="Yes">Yes / হ্যাঁ</option>
+              <option value="No">No / না</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 5 -->
+      <div class="bg-white rounded-xl border border-slate-200 p-5 sm:p-6 shadow-sm">
+        <div class="flex items-center space-x-3 pb-4 mb-5 border-b border-slate-100">
+          <span class="w-7 h-7 rounded-full bg-brand-50 text-brand-500 font-bold flex items-center justify-center text-xs border border-brand-100">5</span>
+          <div>
+            <h2 class="text-base font-bold text-slate-900">Data Collector Information</h2>
+            <p class="text-xs text-slate-500">তথ্য সংগ্রহকারী ও প্রশাসন</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label for="collector_name" class="block text-xs font-semibold text-slate-700 mb-1">Collector Name | তথ্য সংগ্রহকারীর নাম <span class="text-red-500">*</span></label>
+            <input type="text" id="collector_name" name="collector_name" required class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+          </div>
+
+          <div>
+            <label for="collector_mobile" class="block text-xs font-semibold text-slate-700 mb-1">Collector Mobile | সংগ্রহকারীর মোবাইল <span class="text-red-500">*</span></label>
+            <input type="tel" id="collector_mobile" name="collector_mobile" required class="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition-all">
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 6 -->
+      <div class="bg-white rounded-xl border border-slate-200 p-5 sm:p-6 shadow-sm">
+        <div class="flex items-center space-x-3 pb-4 mb-4 border-b border-slate-100">
+          <span class="w-7 h-7 rounded-full bg-brand-50 text-brand-500 font-bold flex items-center justify-center text-xs border border-brand-100">6</span>
+          <div>
+            <h2 class="text-base font-bold text-slate-900">Supporting Documents</h2>
+            <p class="text-xs text-slate-500">প্রয়োজনীয় সংযুক্তি (Accepted: PDF, PNG, JPG)</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          
+          <div class="bg-slate-50 p-3.5 border border-slate-200 border-dashed rounded-lg flex flex-col justify-between space-y-2 hover:border-brand-500 transition-colors">
+            <span class="text-xs font-bold text-slate-800">Birth Certificate <span class="text-red-500">*</span></span>
+            <label class="cursor-pointer inline-flex items-center justify-center px-3 py-1.5 bg-white text-brand-500 border border-brand-500 rounded-md text-xs font-semibold hover:bg-brand-500 hover:text-white transition-all w-fit">
+              📁 Upload File
+              <input type="file" name="birth_certificate" accept=".pdf,image/*" required class="hidden" onchange="handleFileChange(this)">
+            </label>
+            <p class="file-name text-[11px] text-accent-600 font-medium truncate hidden"></p>
+          </div>
+
+          <div class="bg-slate-50 p-3.5 border border-slate-200 border-dashed rounded-lg flex flex-col justify-between space-y-2 hover:border-brand-500 transition-colors">
+            <span class="text-xs font-bold text-slate-800">Mother's NID <span class="text-red-500">*</span></span>
+            <label class="cursor-pointer inline-flex items-center justify-center px-3 py-1.5 bg-white text-brand-500 border border-brand-500 rounded-md text-xs font-semibold hover:bg-brand-500 hover:text-white transition-all w-fit">
+              📁 Upload File
+              <input type="file" name="mother_nid_document" accept=".pdf,image/*" required class="hidden" onchange="handleFileChange(this)">
+            </label>
+            <p class="file-name text-[11px] text-accent-600 font-medium truncate hidden"></p>
+          </div>
+
+          <div class="bg-slate-50 p-3.5 border border-slate-200 border-dashed rounded-lg flex flex-col justify-between space-y-2 hover:border-brand-500 transition-colors">
+            <span class="text-xs font-bold text-slate-800">Father's Death Cert <span class="text-red-500">*</span></span>
+            <label class="cursor-pointer inline-flex items-center justify-center px-3 py-1.5 bg-white text-brand-500 border border-brand-500 rounded-md text-xs font-semibold hover:bg-brand-500 hover:text-white transition-all w-fit">
+              📁 Upload File
+              <input type="file" name="father_death_certificate" accept=".pdf,image/*" required class="hidden" onchange="handleFileChange(this)">
+            </label>
+            <p class="file-name text-[11px] text-accent-600 font-medium truncate hidden"></p>
+          </div>
+
+          <div class="bg-slate-50 p-3.5 border border-slate-200 border-dashed rounded-lg flex flex-col justify-between space-y-2 hover:border-brand-500 transition-colors">
+            <span class="text-xs font-bold text-slate-800">Prottyon | প্রত্যয়ন <span class="text-red-500">*</span></span>
+            <label class="cursor-pointer inline-flex items-center justify-center px-3 py-1.5 bg-white text-brand-500 border border-brand-500 rounded-md text-xs font-semibold hover:bg-brand-500 hover:text-white transition-all w-fit">
+              📁 Upload File
+              <input type="file" name="prottyon" accept=".pdf,image/*" required class="hidden" onchange="handleFileChange(this)">
+            </label>
+            <p class="file-name text-[11px] text-accent-600 font-medium truncate hidden"></p>
+          </div>
+
+          <div class="bg-slate-50 p-3.5 border border-slate-200 border-dashed rounded-lg flex flex-col justify-between space-y-2 hover:border-brand-500 transition-colors">
+            <span class="text-xs font-bold text-slate-800">Academic Result Card <span class="text-red-500">*</span></span>
+            <label class="cursor-pointer inline-flex items-center justify-center px-3 py-1.5 bg-white text-brand-500 border border-brand-500 rounded-md text-xs font-semibold hover:bg-brand-500 hover:text-white transition-all w-fit">
+              📁 Upload File
+              <input type="file" name="academic_result_card" accept=".pdf,image/*" required class="hidden" onchange="handleFileChange(this)">
+            </label>
+            <p class="file-name text-[11px] text-accent-600 font-medium truncate hidden"></p>
+          </div>
+
+          <div class="bg-slate-50 p-3.5 border border-slate-200 border-dashed rounded-lg flex flex-col justify-between space-y-2 hover:border-brand-500 transition-colors">
+            <span class="text-xs font-bold text-slate-800">Full Body Photo <span class="text-red-500">*</span></span>
+            <label class="cursor-pointer inline-flex items-center justify-center px-3 py-1.5 bg-white text-brand-500 border border-brand-500 rounded-md text-xs font-semibold hover:bg-brand-500 hover:text-white transition-all w-fit">
+              📁 Upload Image
+              <input type="file" name="full_body_photo" accept="image/*" required class="hidden" onchange="handleFileChange(this)">
+            </label>
+            <p class="file-name text-[11px] text-accent-600 font-medium truncate hidden"></p>
+          </div>
+
+          <div class="bg-slate-50 p-3.5 border border-slate-200 border-dashed rounded-lg flex flex-col justify-between space-y-2 hover:border-brand-500 transition-colors">
+            <span class="text-xs font-bold text-slate-800">Half Body Photo <span class="text-red-500">*</span></span>
+            <label class="cursor-pointer inline-flex items-center justify-center px-3 py-1.5 bg-white text-brand-500 border border-brand-500 rounded-md text-xs font-semibold hover:bg-brand-500 hover:text-white transition-all w-fit">
+              📁 Upload Image
+              <input type="file" name="half_body_photo" accept="image/*" required class="hidden" onchange="handleFileChange(this)">
+            </label>
+            <p class="file-name text-[11px] text-accent-600 font-medium truncate hidden"></p>
+          </div>
+
+          <div class="bg-slate-50 p-3.5 border border-slate-200 border-dashed rounded-lg flex flex-col justify-between space-y-2 hover:border-brand-500 transition-colors">
+            <span class="text-xs font-bold text-slate-800">Thank You Letter</span>
+            <label class="cursor-pointer inline-flex items-center justify-center px-3 py-1.5 bg-white text-slate-600 border border-slate-300 rounded-md text-xs font-semibold hover:bg-slate-100 transition-all w-fit">
+              📁 Upload (Optional)
+              <input type="file" name="thank_you_letter" accept=".pdf,image/*" class="hidden" onchange="handleFileChange(this)">
+            </label>
+            <p class="file-name text-[11px] text-accent-600 font-medium truncate hidden"></p>
+          </div>
+
+          <div class="bg-slate-50 p-3.5 border border-slate-200 border-dashed rounded-lg flex flex-col justify-between space-y-2 hover:border-brand-500 transition-colors">
+            <span class="text-xs font-bold text-slate-800">Drawing | চিত্রাংকন</span>
+            <label class="cursor-pointer inline-flex items-center justify-center px-3 py-1.5 bg-white text-slate-600 border border-slate-300 rounded-md text-xs font-semibold hover:bg-slate-100 transition-all w-fit">
+              📁 Upload (Optional)
+              <input type="file" name="drawing" accept=".pdf,image/*" class="hidden" onchange="handleFileChange(this)">
+            </label>
+            <p class="file-name text-[11px] text-accent-600 font-medium truncate hidden"></p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Submit Actions -->
+      <div class="flex flex-col sm:flex-row items-center gap-3 pt-2">
+        <button type="submit" class="w-full sm:w-auto px-8 py-3.5 bg-brand-500 hover:bg-brand-600 text-white text-sm font-bold rounded-lg shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2">
+          <span>📤 Submit Application | আবেদন জমা দিন</span>
+        </button>
+        <button type="reset" onclick="clearFilePreviews()" class="w-full sm:w-auto px-6 py-3.5 bg-white hover:bg-slate-100 text-slate-600 border border-slate-300 text-sm font-semibold rounded-lg transition-all">
+          Clear Form
+        </button>
+      </div>
+    </form>
+  </main>
+
+  <!-- Footer -->
+  <footer class="max-w-4xl mx-auto w-full mt-8 py-4 text-center text-xs text-slate-500 border-t border-slate-200">
+    <p>© Islamic Aid Bangladesh - New Orphan Screening System</p>
+  </footer>
+
+  <script>
+    function handleFileChange(input) {
+      const fileNameEl = input.closest('div').querySelector('.file-name');
+      if (input.files && input.files.length > 0) {
+        fileNameEl.textContent = '✓ ' + input.files[0].name;
+        fileNameEl.classList.remove('hidden');
+      } else {
+        fileNameEl.textContent = '';
+        fileNameEl.classList.add('hidden');
+      }
+    }
+
+    function clearFilePreviews() {
+      document.querySelectorAll('.file-name').forEach(el => {
+        el.textContent = '';
+        el.classList.add('hidden');
+      });
+    }
+  </script>
+</body>
+</html>
