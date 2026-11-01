@@ -67,13 +67,8 @@
       <p class="text-xs mt-1">Thank you. Your information has been recorded and sent to the administration.</p>
     </div>
 
-    <!-- Main HTML Form (Netlify & Google Sheets Ready) -->
-<form id="orphanForm" method="POST" action="https://script.google.com/macros/s/AKfycbxqXc7Z0YCw16SFzSLe3VZimC4qwa7kDJbSDaLCWwyffLDRi8OegalrW1b-OAmX1QQrqg/exec" class="space-y-6">
-
-      
-      <!-- Netlify required inputs -->
-      <input type="hidden" name="form-name" value="orphan-application">
-      <p class="hidden"><label>Do not fill this: <input name="bot-field"></label></p>
+    <!-- Main HTML Form (Connected Directly to Google Apps Script) -->
+    <form id="orphanForm" method="POST" action="https://script.google.com/macros/s/AKfycbxqXc7Z0YCw16SFzSLe3VZimC4qwa7kDJbSDaLCWwyffLDRi8OegalrW1b-OAmX1QQrqg/exec" class="space-y-6">
 
       <!-- SECTION 1 -->
       <div class="bg-white rounded-xl border border-slate-200 p-5 sm:p-6 shadow-sm">
@@ -485,21 +480,23 @@
       });
     }
 
-    // AJAX Form Handler to prevent 404 redirects and send data seamlessly to Netlify
-    document.getElementById('orphanForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      const form = e.target;
-      const formData = new FormData(form);
-      const submitBtn = document.getElementById('submitBtn');
-      const successMsg = document.getElementById('successMessage');
+    // Direct Google Apps Script Submission Script
+    const form = document.getElementById('orphanForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const successMsg = document.getElementById('successMessage');
 
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      
       submitBtn.disabled = true;
       submitBtn.textContent = "Submitting... | জমা হচ্ছে...";
 
-      fetch('/', {
+      const formData = new FormData(form);
+
+      fetch('https://script.google.com/macros/s/AKfycbxqXc7Z0YCw16SFzSLe3VZimC4qwa7kDJbSDaLCWwyffLDRi8OegalrW1b-OAmX1QQrqg/exec', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formData).toString()
+        mode: 'no-cors',
+        body: formData
       })
       .then(() => {
         form.reset();
