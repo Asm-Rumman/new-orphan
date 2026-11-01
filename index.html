@@ -61,8 +61,14 @@
   <!-- Main Container -->
   <main class="max-w-4xl mx-auto w-full flex-grow">
 
+    <!-- Success Notification Banner (Hidden by default) -->
+    <div id="successMessage" class="hidden mb-6 p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl shadow-sm text-center">
+      <h3 class="font-bold text-base">Application Submitted Successfully! | আবেদন সফলভাবে জমা হয়েছে!</h3>
+      <p class="text-xs mt-1">Thank you. Your information has been recorded and sent to the administration.</p>
+    </div>
+
     <!-- Main HTML Form (Netlify & Google Sheets Ready) -->
-<form id="orphanForm" name="orphan-application" method="POST" data-netlify="true" enctype="multipart/form-data" data-netlify-honeypot="bot-field" class="space-y-6">      
+    <form id="orphanForm" name="orphan-application" method="POST" data-netlify="true" enctype="multipart/form-data" data-netlify-honeypot="bot-field" class="space-y-6">
       
       <!-- Netlify required inputs -->
       <input type="hidden" name="form-name" value="orphan-application">
@@ -444,7 +450,7 @@
 
       <!-- Submit Actions -->
       <div class="flex flex-col sm:flex-row items-center gap-3 pt-2">
-        <button type="submit" class="w-full sm:w-auto px-8 py-3.5 bg-brand-500 hover:bg-brand-600 text-white text-sm font-bold rounded-lg shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2">
+        <button type="submit" id="submitBtn" class="w-full sm:w-auto px-8 py-3.5 bg-brand-500 hover:bg-brand-600 text-white text-sm font-bold rounded-lg shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2">
           <span>📤 Submit Application | আবেদন জমা দিন</span>
         </button>
         <button type="reset" onclick="clearFilePreviews()" class="w-full sm:w-auto px-6 py-3.5 bg-white hover:bg-slate-100 text-slate-600 border border-slate-300 text-sm font-semibold rounded-lg transition-all">
@@ -477,6 +483,37 @@
         el.classList.add('hidden');
       });
     }
+
+    // AJAX Form Handler to prevent 404 redirects and send data seamlessly to Netlify
+    document.getElementById('orphanForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const form = e.target;
+      const formData = new FormData(form);
+      const submitBtn = document.getElementById('submitBtn');
+      const successMsg = document.getElementById('successMessage');
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Submitting... | জমা হচ্ছে...";
+
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData).toString()
+      })
+      .then(() => {
+        form.reset();
+        clearFilePreviews();
+        successMsg.classList.remove('hidden');
+        submitBtn.disabled = false;
+        submitBtn.textContent = "📤 Submit Application | আবেদন জমা দিন";
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      })
+      .catch((error) => {
+        alert('Submission error. Please try again.');
+        submitBtn.disabled = false;
+        submitBtn.textContent = "📤 Submit Application | আবেদন জমা দিন";
+      });
+    });
   </script>
 </body>
 </html>
