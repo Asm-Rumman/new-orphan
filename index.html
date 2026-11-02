@@ -68,7 +68,8 @@
     </div>
 
     <!-- Main HTML Form (Connected Directly to Google Apps Script) -->
-    <form id="orphanForm" method="POST" action="https://script.google.com/macros/s/AKfycbyXoX13ymnGu5upOQCWpYvfIUsm258XU-8Us92uwUjwnkcBlz7sX29vfYuhaOee70HUDQ/exec" class="space-y-6">
+ <form id="orphanForm" name="orphan-application" method="POST" data-netlify="true" enctype="multipart/form-data" data-netlify-honeypot="bot-field" class="space-y-6">
+<input type="hidden" name="form-name" value="orphan-application">
 
       <!-- SECTION 1 -->
       <div class="bg-white rounded-xl border border-slate-200 p-5 sm:p-6 shadow-sm">
