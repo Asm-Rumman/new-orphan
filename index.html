@@ -48,7 +48,7 @@
   <div class="max-w-4xl mx-auto w-full mb-6">
     <div class="bg-gradient-to-r from-brand-500 to-brand-600 rounded-2xl text-white p-6 sm:p-8 shadow-md relative overflow-hidden">
       <div class="flex items-center space-x-3 mb-3">
-        <div class="w-10 h-10 rounded-lg bg-white/20 backdrop-blur-md flex items-center justify-center text-white font-bold text-lg">
+        <div class="w-10 h-10 rounded-lg bg-white/25 backdrop-blur-md flex items-center justify-center text-white font-bold text-lg">
           IAB
         </div>
         <span class="text-xs font-medium tracking-wide uppercase bg-white/10 px-3 py-1 rounded-full">Islamic Aid Bangladesh</span>
@@ -67,13 +67,13 @@
       <p class="text-xs mt-1">Thank you. Your information has been recorded and sent to the administration.</p>
     </div>
 
-  <!-- Main HTML Form (Netlify Forms Ready) -->
-    <form id="orphanForm" name="orphan-application" method="POST" data-netlify="true" enctype="multipart/form-data" class="space-y-6">
+    <!-- Main HTML Form (Netlify Native Forms Ready) -->
+    <form id="orphanForm" name="orphan-application" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" enctype="multipart/form-data" class="space-y-6">
 
       <!-- Netlify Required Hidden Inputs -->
       <input type="hidden" name="form-name" value="orphan-application">
       <p class="hidden"><label>Do not fill this: <input name="bot-field"></label></p>
-      
+
       <!-- SECTION 1 -->
       <div class="bg-white rounded-xl border border-slate-200 p-5 sm:p-6 shadow-sm">
         <div class="flex items-center space-x-3 pb-4 mb-5 border-b border-slate-100">
@@ -483,39 +483,6 @@
         el.classList.add('hidden');
       });
     }
-
-    // Direct Google Apps Script Submission Script
-    const form = document.getElementById('orphanForm');
-    const submitBtn = document.getElementById('submitBtn');
-    const successMsg = document.getElementById('successMessage');
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      
-      submitBtn.disabled = true;
-      submitBtn.textContent = "Submitting... | জমা হচ্ছে...";
-
-      const formData = new FormData(form);
-
-      fetch('https://script.google.com/macros/s/AKfycbxqXc7Z0YCw16SFzSLe3VZimC4qwa7kDJbSDaLCWwyffLDRi8OegalrW1b-OAmX1QQrqg/exec', {
-        method: 'POST',
-        mode: 'no-cors',
-        body: formData
-      })
-      .then(() => {
-        form.reset();
-        clearFilePreviews();
-        successMsg.classList.remove('hidden');
-        submitBtn.disabled = false;
-        submitBtn.textContent = "📤 Submit Application | আবেদন জমা দিন";
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      })
-      .catch((error) => {
-        alert('Submission error. Please try again.');
-        submitBtn.disabled = false;
-        submitBtn.textContent = "📤 Submit Application | আবেদন জমা দিন";
-      });
-    });
   </script>
 </body>
 </html>
